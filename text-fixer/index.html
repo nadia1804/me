@@ -229,6 +229,38 @@
             color: #e74c3c;
             margin: 0 5px;
         }
+		/* CSS Tambahan untuk Menghilangkan Scroll Horizontal */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* Pastikan elemen utama tidak melebihi batas */
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 90px auto 0; /* Mengatur margin-top dan auto untuk horizontal center */
+            box-sizing: border-box; /* Sangat Penting: Memastikan padding tidak menambah lebar */
+        }
+        
+        /* Perbaikan pada header untuk responsivitas yang lebih baik */
+        header {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px 5%; /* Gunakan persentase untuk padding yang responsif */
+        }
+
+        .header-content {
+            width: 100%; /* Ubah dari 90% ke 100% */
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Perbaikan pada footer */
+        footer {
+            width: 100%;
+            box-sizing: border-box;
+        }
     </style>
 </head>
 <body>

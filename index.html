@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Situs Segera Hadir | Belajarium</title>
+    <meta name="description" content="Belajarium adalah blog edukasi yang dirancang khusus untuk berbagi konten pendidikan, membantu Anda dalam proses belajar yang mudah dan dapat diakses oleh siapa saja.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #5d8538;
+            --background-color: #f0f4f7;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Comfortaa', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0 20px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 50px 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        strong {
+            color: var(--primary-color);
+        }
+
+        #countdown {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            margin-top: 50px;
+        }
+
+        footer i {
+            color: #e74c3c;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://belajarium.id/media/website/belajarium-logo-header.png" alt="Belajarium Logo" class="logo">
+        <h1>Situs Segera Hadir!</h1>
+        <p>
+            Terima kasih telah berkunjung. Halaman ini masih dalam tahap dalam pengembangan, Kami akan mengalihkan Anda kembali ke situs utama.
+        </p>
+        <p>Pengalihan dalam <span id="countdown">5</span> detik...</p>
+    </div>
+
+    <footer>
+        <p>made with love <i class="fas fa-heart"></i> by belajarium</p>
+    </footer>
+
+    <script>
+        let countdown = 5;
+        const countdownElement = document.getElementById('countdown');
+
+        const timer = setInterval(() => {
+            countdown--;
+            countdownElement.textContent = countdown;
+
+            if (countdown <= 0) {
+                clearInterval(timer);
+                window.location.href = 'https://belajarium.id';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

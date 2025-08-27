@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman Tidak Ditemukan (404) | Belajarium</title>
+    <meta name="description" content="Halaman yang Anda cari tidak dapat ditemukan. Kembali ke halaman utama Belajarium.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #C8E6A7;
+            --background-color: #f0f4f7;
+            --text-color: #333;
+            --border-color: #ccc;
+            --button-hover: #b4d293;
+        }
+
+        body {
+            font-family: 'Comfortaa', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Container for 404 Content */
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 50px 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 5rem;
+            margin-bottom: 0;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+
+        .back-home-btn {
+            background-color: var(--primary-color);
+            color: #000;
+            border: none;
+            border-radius: 20px;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none; /* Menghilangkan garis bawah pada tautan */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: inline-block;
+        }
+
+        .back-home-btn:hover {
+            background-color: var(--button-hover);
+            transform: translateY(-2px);
+        }
+
+        .back-home-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Footer Styles */
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            margin-top: 50px;
+        }
+
+        footer i {
+            color: #e74c3c;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>404</h1>
+        <p>Halaman yang Anda cari tidak dapat ditemukan.</p>
+        <a href="https://belajarium.id" class="back-home-btn">
+            <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+        </a>
+    </div>
+
+    <footer>
+        <p>made with love <i class="fas fa-heart"></i> by belajarium</p>
+    </footer>
+</body>
+</html>
