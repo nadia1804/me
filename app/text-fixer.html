@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Fixer - Penghapus Spasi HTML | Belajarium</title>
+    <meta name="description" content="Aplikasi online gratis untuk menghapus spasi berlebih pada kode HTML secara otomatis. Cepat, mudah, dan efisien. Dibuat oleh Belajarium.">
+    <meta name="keywords" content="text fixer, penghapus spasi html, html cleaner, kompres html, html minify, belajarium">
+    <meta name="author" content="Belajarium">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #C8E6A7;
+            --background-color: #f0f4f7;
+            --text-color: #333;
+            --border-color: #ccc;
+            --button-hover: #b4d293;
+        }
+
+        body {
+            font-family: 'Comfortaa', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header Styles */
+        header {
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-logo {
+            height: 40px; /* Ukuran logo diperbesar */
+        }
+
+        .hamburger-menu-btn {
+            display: none;
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #555;
+            transition: color 0.3s;
+        }
+
+        .hamburger-menu-btn:hover {
+            color: var(--primary-color);
+        }
+
+        nav#nav-menu {
+            display: flex;
+        }
+
+        nav#nav-menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav#nav-menu li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav#nav-menu li a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Responsive Navbar */
+        @media (max-width: 768px) {
+            .hamburger-menu-btn {
+                display: block;
+            }
+
+            nav#nav-menu {
+                display: none;
+                position: absolute;
+                top: 60px; /* Menyesuaikan dengan tinggi header baru */
+                right: 0;
+                width: 100%;
+                background-color: #fff;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                flex-direction: column;
+                padding: 10px 0;
+                text-align: center;
+            }
+
+            nav#nav-menu.active {
+                display: flex;
+            }
+
+            nav#nav-menu ul {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            nav#nav-menu li {
+                width: 100%;
+            }
+
+            nav#nav-menu li a {
+                display: block;
+                padding: 15px;
+            }
+        }
+
+        /* Main Content Styles */
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 90px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        p {
+            margin-top: 0;
+            color: #666;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 15px;
+            margin-top: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            box-sizing: border-box;
+            font-family: 'Comfortaa', sans-serif;
+            font-size: 16px;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(200, 230, 167, 0.5);
+        }
+
+        #text-output {
+            background-color: #fafafa;
+            color: #555;
+            cursor: default;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: #000;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background-color: var(--button-hover);
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button i {
+            margin-right: 5px;
+        }
+
+        /* Footer Styles */
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            margin-top: 50px;
+        }
+
+        footer i {
+            color: #e74c3c;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="https://belajarium.id">
+                <img src="https://belajarium.id/media/website/belajarium-logo-header.png" alt="Belajarium Logo" class="header-logo">
+            </a>
+            <button id="hamburger-menu-btn" class="hamburger-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="nav-menu">
+                <ul>
+                    <li><a href="https://belajarium.id" target="_blank">Back to Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Text Fixer</h1>
+        <p>Hapus spasi HTML berlebih dengan mudah.</p>
+        <div class="controls">
+            <button id="reset-btn" title="Reset teks"><i class="fas fa-redo-alt"></i> Reset</button>
+            <button id="fix-and-copy-btn" title="Perbaiki dan salin"><i class="fas fa-magic"></i> Perbaiki & Salin</button>
+            <button id="guide-btn" title="Petunjuk"><i class="fas fa-info-circle"></i> Petunjuk</button>
+        </div>
+        <textarea id="text-input" placeholder="Tempel teks HTML Anda di sini..."></textarea>
+        <textarea id="text-output" placeholder="Hasil perbaikan akan muncul di sini..." readonly></textarea>
+    </div>
+
+    <footer>
+        <p>made with love <i class="fas fa-heart"></i> by belajarium</p>
+    </footer>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburgerBtn = document.getElementById('hamburger-menu-btn');
+            const navMenu = document.getElementById('nav-menu');
+            const textInput = document.getElementById('text-input');
+            const textOutput = document.getElementById('text-output');
+            const resetBtn = document.getElementById('reset-btn');
+            const fixAndCopyBtn = document.getElementById('fix-and-copy-btn');
+            const guideBtn = document.getElementById('guide-btn');
+
+            hamburgerBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+
+            document.querySelectorAll('#nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            const showToast = (message) => {
+                Toastify({
+                    text: message,
+                    duration: 3000,
+                    gravity: "bottom",
+                    position: "right",
+                    backgroundColor: "#C8E6A7",
+                    stopOnFocus: true,
+                    style: {
+                        borderRadius: "20px",
+                        color: "#000"
+                    }
+                }).showToast();
+            };
+
+            const fixText = (text) => {
+                let cleanedText = text.replace(/\s+/g, ' ');
+                cleanedText = cleanedText.replace(/>\s/g, '>');
+                cleanedText = cleanedText.replace(/\s</g, '<');
+                cleanedText = cleanedText.trim();
+                return cleanedText;
+            };
+
+            textInput.addEventListener('paste', (e) => {
+                e.preventDefault();
+                const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+                const fixedText = fixText(pastedText);
+
+                textInput.value = pastedText;
+                textOutput.value = fixedText;
+                
+                navigator.clipboard.writeText(fixedText).then(() => {
+                    showToast('Teks berhasil diperbaiki dan disalin secara otomatis!');
+                }).catch(err => {
+                    console.error('Gagal menyalin:', err);
+                    showToast('Gagal menyalin teks ke clipboard.');
+                });
+            });
+
+            textInput.addEventListener('input', () => {
+                const fixedText = fixText(textInput.value);
+                textOutput.value = fixedText;
+            });
+
+            resetBtn.addEventListener('click', () => {
+                textInput.value = '';
+                textOutput.value = '';
+                textInput.focus();
+                showToast('Teks berhasil direset.');
+            });
+
+            fixAndCopyBtn.addEventListener('click', () => {
+                if (textInput.value) {
+                    const fixedText = fixText(textInput.value);
+                    textOutput.value = fixedText;
+                    
+                    navigator.clipboard.writeText(fixedText).then(() => {
+                        showToast('Teks berhasil diperbaiki dan disalin!');
+                    }).catch(err => {
+                        console.error('Gagal menyalin:', err);
+                        showToast('Gagal menyalin teks ke clipboard.');
+                    });
+                } else {
+                    showToast('Tidak ada teks untuk diperbaiki.');
+                }
+            });
+
+            guideBtn.addEventListener('click', () => {
+                showToast('Tempel teks HTML di kotak pertama untuk perbaikan otomatis, atau klik "Perbaiki & Salin" secara manual.');
+            });
+        });
+    </script>
+</body>
+</html>
