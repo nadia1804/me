@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pill Generator | Belajarium</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap');
+
+  :root {
+    --primary-color: #C8E6A7;
+    --background-color: #f0f4f7;
+    --text-color: #333;
+    --border-color: #ccc;
+    --button-hover: #b4d293;
+  }
+
+  body {
+    font-family: 'Comfortaa', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Header Styles (dipertahankan) */
+  header {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 10px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+  }
+
+  .header-content {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-logo {
+    height: 40px;
+  }
+
+  .hamburger-menu-btn {
+    display: none;
+    font-size: 1.8rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #555;
+    transition: color 0.3s;
+  }
+
+  .hamburger-menu-btn:hover {
+    color: var(--primary-color);
+  }
+
+  nav#nav-menu {
+    display: flex;
+  }
+
+  nav#nav-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  nav#nav-menu li a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+
+  nav#nav-menu li a:hover {
+    color: var(--primary-color);
+  }
+
+  @media (max-width: 768px) {
+    .hamburger-menu-btn {
+      display: block;
+    }
+    nav#nav-menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 0;
+      width: 100%;
+      background-color: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      flex-direction: column;
+      padding: 10px 0;
+      text-align: center;
+    }
+    nav#nav-menu.active {
+      display: flex;
+    }
+    nav#nav-menu ul {
+      flex-direction: column;
+      gap: 0;
+    }
+    nav#nav-menu li {
+      width: 100%;
+    }
+    nav#nav-menu li a {
+      display: block;
+      padding: 15px;
+    }
+  }
+
+  /* Main Container */
+  .container {
+    width: 90%;
+    max-width: 800px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 100px;
+  }
+
+  h1 {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+  }
+
+  textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .controls {
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  button {
+    background-color: var(--primary-color);
+    color: #000;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  button:hover {
+    background-color: var(--button-hover);
+    transform: translateY(-2px);
+  }
+
+  .pill-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .pill {
+    padding: 8px 15px;
+    border-radius: 20px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 14px;
+    display: inline-block;
+    animation: fadeIn 0.25s ease;
+    user-select: none;
+  }
+
+  .pill:hover {
+    transform: translateY(-1px);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.92); }
+    to { opacity: 1; transform: scale(1); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <a href="https://belajarium.id/">
+      <img src="https://belajarium.id/media/website/belajarium-logo-header.png" alt="Belajarium Logo" class="header-logo" />
+    </a>
+    <button id="hamburger-menu-btn" class="hamburger-menu-btn" aria-label="Toggle menu">
+      <i class="fas fa-bars"></i>
+    </button>
+    <nav id="nav-menu">
+      <ul>
+        <li><a href="https://belajarium.id/">Home</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+  <h1>Pill Generator</h1>
+  <p>Ketik tag / hashtag / keyword, pisahkan dengan spasi atau koma</p>
+
+  <textarea id="tag-input" placeholder="Contoh: #coding belajar kreatif edukasi, game, UI/UX"></textarea>
+
+  <div class="controls">
+    <button id="generate"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate</button>
+    <button id="clear"><i class="fa-regular fa-trash-can"></i> Clear</button>
+    <button id="copy-all"><i class="fa-regular fa-copy"></i> Copy All</button>
+    <button id="text-white"><i class="fa-solid fa-font"></i> Teks Putih</button>
+    <button id="text-black"><i class="fa-solid fa-font"></i> Teks Hitam</button>
+  </div>
+
+  <div class="pill-container" id="pill-container" aria-live="polite"></div>
+</div>
+
+<script>
+  // Elements
+  const input = document.getElementById('tag-input');
+  const container = document.getElementById('pill-container');
+  const btnGenerate = document.getElementById('generate');
+  const btnClear = document.getElementById('clear');
+  const btnCopy = document.getElementById('copy-all');
+  const btnWhite = document.getElementById('text-white');
+  const btnBlack = document.getElementById('text-black');
+
+  // 50 curated colors (cerah + ramah mata)
+  const baseColors = [
+    '#FF6B6B','#4ECDC4','#45B7D1','#FFA07A','#9B59B6','#F39C12','#2ECC71','#E67E22','#1ABC9C','#E74C3C',
+    '#16A085','#8E44AD','#D35400','#27AE60','#2980B9','#F1C40F','#C0392B','#7F8C8D','#BDC3C7','#34495E',
+    '#FFB6C1','#FF69B4','#FF1493','#DB7093','#FF4500','#FFD700','#ADFF2F','#7FFF00','#00FA9A','#00CED1',
+    '#1E90FF','#4169E1','#8A2BE2','#9932CC','#BA55D3','#FF6347','#CD5C5C','#F08080','#20B2AA','#5F9EA0',
+    '#B0E0E6','#87CEFA','#6495ED','#6A5ACD','#708090','#2F4F4F','#556B2F','#8B4513','#A0522D','#BC8F8F'
+  ];
+
+  // State
+  let paletteQueue = [];
+  let currentTextColor = '#ffffff'; // default putih
+
+  function shuffleArray(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  function nextColor() {
+    if (paletteQueue.length === 0) {
+      paletteQueue = shuffleArray(baseColors);
+    }
+    return paletteQueue.shift();
+  }
+
+  function parseTags(raw) {
+    return raw
+      .split(/[\s,]+/g)
+      .map(t => t.trim())
+      .filter(t => t.length > 0);
+  }
+
+  function renderPills(tags) {
+    container.innerHTML = '';
+    tags.forEach(tag => {
+      const pill = document.createElement('span');
+      pill.className = 'pill';
+      pill.textContent = tag;
+      pill.style.backgroundColor = nextColor();
+      pill.style.color = currentTextColor;
+      container.appendChild(pill);
+    });
+  }
+
+  // Actions
+  btnGenerate.addEventListener('click', () => {
+    const tags = parseTags(input.value);
+    renderPills(tags);
+  });
+
+  btnClear.addEventListener('click', () => {
+    input.value = '';
+    container.innerHTML = '';
+    // reset queue supaya urutan warna baru terasa segar saat generate berikutnya
+    paletteQueue = [];
+  });
+
+  btnCopy.addEventListener('click', async () => {
+    const tags = Array.from(container.querySelectorAll('.pill')).map(p => p.textContent);
+    const text = tags.join(', ');
+    try {
+      await navigator.clipboard.writeText(text);
+      btnCopy.textContent = 'Copied!';
+      setTimeout(() => (btnCopy.innerHTML = '<i class="fa-regular fa-copy"></i> Copy All'), 1200);
+    } catch (e) {
+      // fallback
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      btnCopy.textContent = 'Copied!';
+      setTimeout(() => (btnCopy.innerHTML = '<i class="fa-regular fa-copy"></i> Copy All'), 1200);
+    }
+  });
+
+  btnWhite.addEventListener('click', () => {
+    currentTextColor = '#ffffff';
+    container.querySelectorAll('.pill').forEach(p => p.style.color = currentTextColor);
+  });
+
+  btnBlack.addEventListener('click', () => {
+    currentTextColor = '#000000';
+    container.querySelectorAll('.pill').forEach(p => p.style.color = currentTextColor);
+  });
+
+  // Hamburger menu toggle
+  document.getElementById('hamburger-menu-btn').addEventListener('click', () => {
+    document.getElementById('nav-menu').classList.toggle('active');
+  });
+</script>
+
+</body>
+</html>
